@@ -2435,7 +2435,13 @@ DOSM.Common.ShowJson = function (stringContent, title) {
 DOSM.Common.BindWebResourcePath = function (id) {
     $("#" + id).on("input", function (e) {
         $(this).val(function (i, v) {
-            return v.replace(/[^\w./-]/g, "").replace("./", ".").replace("/.", "/").replace("//", "/").replace("..", ".").replace("--", "-").replace("__", "_");
+            return v.replace(/[^\w./-]/g, "")
+                     .replace(/\.\//g, ".")
+                     .replace(/\/\./g, "/")
+                     .replace(/\/\//g, "/")
+                     .replace(/\.\./g, ".")
+                     .replace(/--/g, "-")
+                     .replace(/__/g, "_");
         });
     });
 }
